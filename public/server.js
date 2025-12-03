@@ -39,11 +39,14 @@ app.post("/send-email", async (req, res) => {
   };
 
   try {
+    if (!process.env.GMAIL_USER || !process.env.GMAIL_PASS) {
+      return res.status(500).json({ message: "Server configuration error. Missing email credentials." });
+    }
     await transporter.sendMail(mailOptions);
-    res.json({ message: "Email sent successfully!" });
+    res.status(200).json({ message: "Email sent successfully!" });
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Email failed" });
+    console.error("Email error:", err);
+    res.status(500).json({ message: "Email failed: " + err.message });
   }
 });
 

@@ -8,6 +8,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
+// Serve form.html as the root route
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/form.html");
+});
+
 app.post("/send-email", async (req, res) => {
   const { name, email, product, price } = req.body;
 

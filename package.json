@@ -4,7 +4,7 @@
   "description": "Email sending API with Express and Nodemailer",
   "main": "public/server.js",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "start": "node public/server.js",
